@@ -1,0 +1,49 @@
+name: VosxoD
+description: A new Flutter project.
+
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.3
+  provider: ^5.0.0
+  date_field: ^2.0.1
+  path_provider: ^2.0.2
+  http: ^0.13.3
+  get_storage: ^2.0.2
+  io: ^1.0.0
+  intl: ^0.17.0
+  sizer: ^2.0.13
+  # lottie: ^1.0.1
+  community_material_icon: ^5.9.55
+  page_transition: "^2.0.2"
+  mask_text_input_formatter: ^2.0.0
+  passcode_screen: ^2.0.0
+  flutter_slidable: ^0.6.0
+  # flutter_redux: ^0.8.2
+  # redux: ^5.0.0
+  # flutter_redux_dev_tools: ^0.5.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - asset/image/
+    - asset/logo/
+    - asset/
+  fonts:
+    - family: CeraPro
+      fonts:
+        - asset: asset/fonts/CeraProBold.otf
+          weight: 700
+    - family: CeraProLight
+      fonts:
+        - asset: asset/fonts/CeraProLight.otf
+          weight: 700
