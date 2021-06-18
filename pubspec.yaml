@@ -27,7 +27,7 @@ dependencies:
   # flutter_redux: ^0.8.2
   # redux: ^5.0.0
   # flutter_redux_dev_tools: ^0.5.1
-
+  photo_view: ^0.11.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -1,4 +1,6 @@
+import 'package:VosxoD/widget/basketScreen/image_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 class HistoryItems extends StatelessWidget {
   final String? image;

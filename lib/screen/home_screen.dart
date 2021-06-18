@@ -258,7 +258,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              Expanded(
+              Expanded(flex:12,
                 child: homeJson.length != 0
                     ? Container(
                         padding: EdgeInsets.only(

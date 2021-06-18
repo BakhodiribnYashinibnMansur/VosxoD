@@ -48,7 +48,7 @@ class HomeScreenCard extends StatelessWidget {
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: 'CeraProLight',
-                  fontSize: 14,
+                  fontSize: 13,
                   fontWeight: FontWeight.w100,
                 ),
               ),

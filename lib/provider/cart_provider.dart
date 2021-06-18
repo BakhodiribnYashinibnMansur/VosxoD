@@ -46,8 +46,16 @@ class CartProviderData with ChangeNotifier {
     return total;
   }
 
-  void addItems(String productId, String price, String title, String image,
-      String count, String idOfProducts, String isCount, String typeOfCount) {
+  void addItems(
+    String productId,
+    String price,
+    String title,
+    String image,
+    String count,
+    String idOfProducts,
+    String isCount,
+    String typeOfCount,
+  ) {
     if (_items.containsKey(productId)) {
       _items.update(
         productId,

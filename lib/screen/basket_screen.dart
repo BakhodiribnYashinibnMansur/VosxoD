@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:VosxoD/utils/my_prefs.dart';
+import 'package:VosxoD/widget/basketScreen/image_screen.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -274,343 +275,426 @@ class _BasketScreenState extends State<BasketScreen> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Container(
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 2.5.h,
-                                        vertical: .7.h,
-                                      ),
-                                      width: 9.h,
-                                      height: 9.h,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        image: DecorationImage(
-                                          image: NetworkImage(
-                                            cart.items.values
-                                                .toList()[index]
-                                                .image!,
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.of(context).push(
+                                          PageTransition(
+                                            type: PageTransitionType.scale,
+                                            child: ImageScreen(
+                                                image:     cart.items.values
+                                                    .toList()[index]
+                                                    .image!, title:     cart.items.values
+                                                    .toList()[index]
+                                                    .title!),
+                                            ctx: context,
+                                            alignment: Alignment.center,
                                           ),
-                                          fit: BoxFit.cover,
+                                        );
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 2.5.h,
+                                          vertical: .7.h,
+                                        ),
+                                        width: 9.h,
+                                        height: 9.h,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          image: DecorationImage(
+                                            image: NetworkImage(
+                                              cart.items.values
+                                                  .toList()[index]
+                                                  .image!,
+                                            ),
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                       ),
                                     ),
                                     Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          width: 47.w,
-                                          padding: EdgeInsets.symmetric(
-                                            vertical: .7.h,
-                                            horizontal: 1.h,
-                                          ),
-                                          child: Text(
-                                            cart.items.values
-                                                .toList()[index]
-                                                .title!,
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              color:
-                                                  Color.fromRGBO(88, 88, 88, 1),
-                                              fontFamily: 'CeraProLight',
-                                              fontSize: 12.sp,
-                                              fontWeight: FontWeight.w700,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            width: 74.w,
+                                            padding: EdgeInsets.symmetric(
+                                              vertical: .7.h,
+                                              horizontal: 2.h,
+                                            ),
+                                            child: Text(
+                                              cart.items.values
+                                                  .toList()[index]
+                                                  .title!,
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                color: Color.fromRGBO(
+                                                    88, 88, 88, 1),
+                                                fontFamily: 'CeraProLight',
+                                                fontSize: 9.sp,
+                                                fontWeight: FontWeight.w700,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.symmetric(
-                                            horizontal: 1.h,
-                                            vertical: 2,
-                                          ),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Narxi: ',
-                                                style: TextStyle(
-                                                  color: Color.fromRGBO(
-                                                      88, 88, 88, 1),
-                                                  fontFamily: 'CeraProLight',
-                                                  fontSize: 10.sp,
-                                                  letterSpacing: 0,
-                                                  fontWeight: FontWeight.w400,
-                                                  height: 1.5,
-                                                ),
-                                              ),
-                                              Text(
-                                                NumberFormat.currency(
-                                                      name: ' ',
-                                                    )
-                                                        .format(double.parse(
-                                                            cart.items.values
-                                                                .toList()[index]
-                                                                .price!))
-                                                        .substring(
-                                                            0,
-                                                            NumberFormat
-                                                                        .currency(
-                                                                  name: ' ',
-                                                                )
-                                                                    .format(double.parse(cart
+                                          Container(
+                                            padding: EdgeInsets.symmetric(
+                                              vertical: 1.h,
+                                            ),
+                                            height: 10.h,
+                                            child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Padding(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                          horizontal: 1.h,
+                                                          vertical: 2,
+                                                        ),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              'Narxi: ',
+                                                              style: TextStyle(
+                                                                color: Color
+                                                                    .fromRGBO(
+                                                                        88,
+                                                                        88,
+                                                                        88,
+                                                                        1),
+                                                                fontFamily:
+                                                                    'CeraProLight',
+                                                                fontSize: 10.sp,
+                                                                letterSpacing:
+                                                                    0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                height: 1.5,
+                                                              ),
+                                                            ),
+                                                            Text(
+                                                              NumberFormat
+                                                                          .currency(
+                                                                    name: ' ',
+                                                                  )
+                                                                      .format(double.parse(cart
+                                                                          .items
+                                                                          .values
+                                                                          .toList()[
+                                                                              index]
+                                                                          .price!))
+                                                                      .substring(
+                                                                          0,
+                                                                          NumberFormat.currency(
+                                                                                name: ' ',
+                                                                              ).format(double.parse(cart.items.values.toList()[index].price!)).length -
+                                                                              3) +
+                                                                  '  so\'m',
+                                                              style: TextStyle(
+                                                                color: Color
+                                                                    .fromRGBO(
+                                                                        88,
+                                                                        88,
+                                                                        88,
+                                                                        1),
+                                                                fontFamily:
+                                                                    'CeraPro',
+                                                                fontSize: 10.sp,
+                                                                letterSpacing:
+                                                                    0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w700,
+                                                                height: 1.5,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                          horizontal: .7.h,
+                                                          vertical: 1.h,
+                                                        ),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              'Zaxirada: ',
+                                                              style: TextStyle(
+                                                                color: Color
+                                                                    .fromRGBO(
+                                                                        88,
+                                                                        88,
+                                                                        88,
+                                                                        1),
+                                                                fontFamily:
+                                                                    'CeraProLight',
+                                                                fontSize: 10.sp,
+                                                                letterSpacing:
+                                                                    0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w200,
+                                                              ),
+                                                            ),
+                                                            Text(
+                                                              cart.items.values
+                                                                          .toList()[
+                                                                              index]
+                                                                          .isCount ==
+                                                                      '1'
+                                                                  ? '${cart.items.values.toList()[index].count}'.substring(
+                                                                          0,
+                                                                          cart.items.values.toList()[index].count!.toString().length -
+                                                                              2) +
+                                                                      '  ' +
+                                                                      cart.items
+                                                                          .values
+                                                                          .toList()[
+                                                                              index]
+                                                                          .typeOfCount!
+                                                                  : '${cart.items.values.toList()[index].count}' +
+                                                                      '  ' +
+                                                                      cart.items
+                                                                          .values
+                                                                          .toList()[
+                                                                              index]
+                                                                          .typeOfCount!,
+                                                              style: TextStyle(
+                                                                color: Color
+                                                                    .fromRGBO(
+                                                                        88,
+                                                                        88,
+                                                                        88,
+                                                                        1),
+                                                                fontFamily:
+                                                                    'CeraPro',
+                                                                fontSize: 10.sp,
+                                                                letterSpacing:
+                                                                    0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w700,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Container(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 7.w),
+                                                        child: cart.items.values
+                                                                    .toList()[
+                                                                        index]
+                                                                    .isCount !=
+                                                                '1'
+                                                            ? Container(
+                                                                width: 20.w,
+                                                                height: 20.h,
+                                                                child:
+                                                                    TextField(
+                                                                  inputFormatters: [
+                                                                    LengthLimitingTextInputFormatter(
+                                                                      7,
+                                                                    ),
+                                                                    // FilteringTextInputFormatter
+                                                                    //     .allow(RegExp('[0-9]'))
+                                                                  ],
+                                                                  controller:
+                                                                      controllerArray[
+                                                                          index],
+                                                                  onChanged:
+                                                                      (text) {
+                                                                    controllerArray[
+                                                                            index]
+                                                                        .addListener(
+                                                                            () {
+                                                                      cart.updateValue(
+                                                                        cart.items
+                                                                            .values
+                                                                            .toList()[index]
+                                                                            .id
+                                                                            .toString(),
+                                                                        controllerArray[index].text.length ==
+                                                                                0
+                                                                            ? '0.0'
+                                                                            : controllerArray[index].text,
+                                                                      );
+                                                                      if (cart.items
+                                                                              .values
+                                                                              .toList()[
+                                                                                  index]
+                                                                              .count! <
+                                                                          cart.items
+                                                                              .values
+                                                                              .toList()[index]
+                                                                              .quantity!) {
+                                                                        cart.updateValue(
+                                                                            cart.items.values.toList()[index].id!,
+                                                                            cart.items.values.toList()[index].count.toString());
+                                                                        setState(
+                                                                            () {
+                                                                          controllerArray[index].text =
+                                                                              '${cart.items.values.toList()[index].count}';
+                                                                        });
+                                                                      }
+                                                                      analyzeStock();
+                                                                    });
+                                                                  },
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          10.sp),
+                                                                  keyboardType:
+                                                                      TextInputType
+                                                                          .number,
+                                                                  decoration:
+                                                                      InputDecoration(
+                                                                    border:
+                                                                        OutlineInputBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius
+                                                                              .only(
+                                                                        topLeft:
+                                                                            Radius.circular(12),
+                                                                        topRight:
+                                                                            Radius.circular(12),
+                                                                        bottomLeft:
+                                                                            Radius.circular(12),
+                                                                        bottomRight:
+                                                                            Radius.circular(12),
+                                                                      ),
+                                                                    ),
+                                                                    labelText: cart
                                                                         .items
                                                                         .values
                                                                         .toList()[
                                                                             index]
-                                                                        .price!))
-                                                                    .length -
-                                                                3) +
-                                                    '  so\'m',
-                                                style: TextStyle(
-                                                  color: Color.fromRGBO(
-                                                      88, 88, 88, 1),
-                                                  fontFamily: 'CeraPro',
-                                                  fontSize: 12.sp,
-                                                  letterSpacing: 0,
-                                                  fontWeight: FontWeight.w700,
-                                                  height: 1.5,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.symmetric(
-                                            horizontal: .7.h,
-                                            vertical: 1.h,
-                                          ),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Zaxirada: ',
-                                                style: TextStyle(
-                                                  color: Color.fromRGBO(
-                                                      88, 88, 88, 1),
-                                                  fontFamily: 'CeraProLight',
-                                                  fontSize: 12.sp,
-                                                  letterSpacing: 0,
-                                                  fontWeight: FontWeight.w200,
-                                                ),
-                                              ),
-                                              Text(
-                                                cart.items.values
-                                                            .toList()[index]
-                                                            .isCount ==
-                                                        '1'
-                                                    ? '${cart.items.values.toList()[index].count}'
-                                                            .substring(
-                                                                0,
-                                                                cart.items
+                                                                        .typeOfCount,
+                                                                  ),
+                                                                ),
+                                                              )
+                                                            : Container(
+                                                                width: 20.w,
+                                                                height: 20.h,
+                                                                child:
+                                                                    TextField(
+                                                                  inputFormatters: [
+                                                                    LengthLimitingTextInputFormatter(
+                                                                      7,
+                                                                    ),
+                                                                    FilteringTextInputFormatter
+                                                                        .allow(RegExp(
+                                                                            '[0-9]')),
+                                                                  ],
+                                                                  controller:
+                                                                      controllerArray[
+                                                                          index],
+                                                                  onChanged:
+                                                                      (text) {
+                                                                    controllerArray[
+                                                                            index]
+                                                                        .addListener(
+                                                                            () {
+                                                                      cart.updateValue(
+                                                                        cart.items
+                                                                            .values
+                                                                            .toList()[index]
+                                                                            .id
+                                                                            .toString(),
+                                                                        controllerArray[index].text.length ==
+                                                                                0
+                                                                            ? '0.0'
+                                                                            : controllerArray[index].text,
+                                                                      );
+                                                                      if (cart.items
+                                                                              .values
+                                                                              .toList()[
+                                                                                  index]
+                                                                              .count! <
+                                                                          cart.items
+                                                                              .values
+                                                                              .toList()[index]
+                                                                              .quantity!) {
+                                                                        cart.updateValue(
+                                                                            cart.items.values.toList()[index].id!,
+                                                                            cart.items.values.toList()[index].count.toString());
+                                                                        setState(
+                                                                            () {
+                                                                          controllerArray[index].text =
+                                                                              '${cart.items.values.toList()[index].count!.toInt()}';
+                                                                        });
+                                                                      }
+                                                                      analyzeStock();
+                                                                    });
+                                                                  },
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          10.sp),
+                                                                  keyboardType:
+                                                                      TextInputType
+                                                                          .number,
+                                                                  decoration:
+                                                                      InputDecoration(
+                                                                    border:
+                                                                        OutlineInputBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius
+                                                                              .only(
+                                                                        topLeft:
+                                                                            Radius.circular(12),
+                                                                        topRight:
+                                                                            Radius.circular(12),
+                                                                        bottomLeft:
+                                                                            Radius.circular(12),
+                                                                        bottomRight:
+                                                                            Radius.circular(12),
+                                                                      ),
+                                                                    ),
+                                                                    labelText: cart
+                                                                        .items
                                                                         .values
                                                                         .toList()[
                                                                             index]
-                                                                        .count!
-                                                                        .toString()
-                                                                        .length -
-                                                                    2) +
-                                                        '  ' +
-                                                        cart.items.values
-                                                            .toList()[index]
-                                                            .typeOfCount!
-                                                    : '${cart.items.values.toList()[index].count}' +
-                                                        '  ' +
-                                                        cart.items.values
-                                                            .toList()[index]
-                                                            .typeOfCount!,
-                                                style: TextStyle(
-                                                  color: Color.fromRGBO(
-                                                      88, 88, 88, 1),
-                                                  fontFamily: 'CeraPro',
-                                                  fontSize: 12.sp,
-                                                  letterSpacing: 0,
-                                                  fontWeight: FontWeight.w700,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Spacer(),
-                                    cart.items.values.toList()[index].isCount !=
-                                            '1'
-                                        ? Container(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: .5.h,
-                                                vertical: 3.h),
-                                            child: Center(
-                                              child: Container(
-                                                width: 20.w,
-                                                height: 20.h,
-                                                child: TextField(
-                                                  inputFormatters: [
-                                                    LengthLimitingTextInputFormatter(
-                                                      7,
-                                                    ),
-                                                    // FilteringTextInputFormatter
-                                                    //     .allow(RegExp('[0-9]'))
-                                                  ],
-                                                  controller:
-                                                      controllerArray[index],
-                                                  onChanged: (text) {
-                                                    controllerArray[index]
-                                                        .addListener(() {
-                                                      cart.updateValue(
-                                                        cart.items.values
-                                                            .toList()[index]
-                                                            .id
-                                                            .toString(),
-                                                        controllerArray[index]
-                                                                    .text
-                                                                    .length ==
-                                                                0
-                                                            ? '0.0'
-                                                            : controllerArray[
-                                                                    index]
-                                                                .text,
-                                                      );
-                                                      if (cart.items.values
-                                                              .toList()[index]
-                                                              .count! <
-                                                          cart.items.values
-                                                              .toList()[index]
-                                                              .quantity!) {
-                                                        cart.updateValue(
-                                                            cart.items.values
-                                                                .toList()[index]
-                                                                .id!,
-                                                            cart.items.values
-                                                                .toList()[index]
-                                                                .count
-                                                                .toString());
-                                                        setState(() {
-                                                          controllerArray[index]
-                                                                  .text =
-                                                              '${cart.items.values.toList()[index].count}';
-                                                        });
-                                                      }
-                                                      analyzeStock();
-                                                    });
-                                                  },
-                                                  style: TextStyle(
-                                                      fontSize: 10.sp),
-                                                  keyboardType:
-                                                      TextInputType.number,
-                                                  decoration: InputDecoration(
-                                                    border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                        topLeft:
-                                                            Radius.circular(12),
-                                                        topRight:
-                                                            Radius.circular(12),
-                                                        bottomLeft:
-                                                            Radius.circular(12),
-                                                        bottomRight:
-                                                            Radius.circular(12),
+                                                                        .typeOfCount,
+                                                                  ),
+                                                                ),
+                                                              ),
                                                       ),
-                                                    ),
-                                                    labelText: cart.items.values
-                                                        .toList()[index]
-                                                        .typeOfCount,
+                                                    ],
                                                   ),
-                                                ),
-                                              ),
-                                            ),
-                                          )
-                                        : Container(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: .5.h,
-                                                vertical: 3.h),
-                                            child: Center(
-                                              child: Container(
-                                                width: 20.w,
-                                                height: 20.h,
-                                                child: TextField(
-                                                  inputFormatters: [
-                                                    LengthLimitingTextInputFormatter(
-                                                      7,
-                                                    ),
-                                                    FilteringTextInputFormatter
-                                                        .allow(RegExp('[0-9]')),
-                                                  ],
-                                                  controller:
-                                                      controllerArray[index],
-                                                  onChanged: (text) {
-                                                    controllerArray[index]
-                                                        .addListener(() {
-                                                      cart.updateValue(
-                                                        cart.items.values
-                                                            .toList()[index]
-                                                            .id
-                                                            .toString(),
-                                                        controllerArray[index]
-                                                                    .text
-                                                                    .length ==
-                                                                0
-                                                            ? '0.0'
-                                                            : controllerArray[
-                                                                    index]
-                                                                .text,
-                                                      );
-                                                      if (cart.items.values
-                                                              .toList()[index]
-                                                              .count! <
-                                                          cart.items.values
-                                                              .toList()[index]
-                                                              .quantity!) {
-                                                        cart.updateValue(
-                                                            cart.items.values
-                                                                .toList()[index]
-                                                                .id!,
-                                                            cart.items.values
-                                                                .toList()[index]
-                                                                .count
-                                                                .toString());
-                                                        setState(() {
-                                                          controllerArray[index]
-                                                                  .text =
-                                                              '${cart.items.values.toList()[index].count!.toInt()}';
-                                                        });
-                                                      }
-                                                      analyzeStock();
-                                                    });
-                                                  },
-                                                  style: TextStyle(
-                                                      fontSize: 10.sp),
-                                                  keyboardType:
-                                                      TextInputType.number,
-                                                  decoration: InputDecoration(
-                                                    border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                        topLeft:
-                                                            Radius.circular(12),
-                                                        topRight:
-                                                            Radius.circular(12),
-                                                        bottomLeft:
-                                                            Radius.circular(12),
-                                                        bottomRight:
-                                                            Radius.circular(12),
-                                                      ),
-                                                    ),
-                                                    labelText: cart.items.values
-                                                        .toList()[index]
-                                                        .typeOfCount,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
+                                                ]),
                                           ),
+                                        ]),
                                   ],
                                 ),
                               ),

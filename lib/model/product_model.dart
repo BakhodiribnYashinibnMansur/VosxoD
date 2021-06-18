@@ -54,7 +54,7 @@ class Product {
   double? warningCount;
   String? productType;
   int? productTypeCheck;
-  int? price;
+  dynamic? price;
   String? codeProduct;
   String? image;
   int? warranty;

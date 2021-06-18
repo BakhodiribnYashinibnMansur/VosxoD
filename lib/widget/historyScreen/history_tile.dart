@@ -1,11 +1,13 @@
+import 'package:VosxoD/widget/basketScreen/image_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:sizer/sizer.dart';
 
 class HistoryListTitle extends StatelessWidget {
   final String? image;
   final String? title;
   final String? personName;
-  final String? productNumber;
+  final double? productNumber;
   final String? price;
   final String? isCheck;
   final String? typeOfCount;
@@ -20,7 +22,6 @@ class HistoryListTitle extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    print(image);
     return Column(
       children: [
         Container(
@@ -37,21 +38,26 @@ class HistoryListTitle extends StatelessWidget {
                 ),
                 child: Row(
                   children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.all(.4.h),
-                      child: image!.length != 0
-                          ? CircleAvatar(
-                              radius: 22.sp,
-                              backgroundImage: NetworkImage(
-                                image!,
-                              ),
-                            )
-                          : CircleAvatar(
-                              radius: 22.sp,
-                              backgroundImage: AssetImage(
-                                'asset/image/photo.png',
-                              ),
-                            ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          PageTransition(
+                            type: PageTransitionType.scale,
+                            child: ImageScreen(image: image!, title: title!),
+                            ctx: context,
+                            alignment: Alignment.center,
+                          ),
+                        );
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.all(.4.h),
+                        child: CircleAvatar(
+                          radius: 22.sp,
+                          backgroundImage: NetworkImage(
+                            image!,
+                          ),
+                        ),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -88,7 +94,13 @@ class HistoryListTitle extends StatelessWidget {
                               children: <Widget>[
                                 Container(
                                   child: Text(
-                                    productNumber! + '  ' + typeOfCount!,
+                                    isCheck! == '1'
+                                        ? productNumber!.toInt().toString() +
+                                            '  ' +
+                                            typeOfCount!
+                                        : productNumber.toString() +
+                                            '  ' +
+                                            typeOfCount!,
                                     style: TextStyle(
                                       color: Color.fromRGBO(255, 255, 255, 1),
                                       fontFamily: 'CeraProLight',
