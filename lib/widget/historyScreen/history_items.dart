@@ -1,6 +1,7 @@
 import 'package:VosxoD/widget/basketScreen/image_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'dart:math' as math;
 
 class HistoryItems extends StatelessWidget {
   final String? image;
@@ -25,10 +26,23 @@ class HistoryItems extends StatelessWidget {
             vertical: 10,
           ),
           child: ListTile(
-            leading: ClipRRect(
-              borderRadius: BorderRadius.circular(31.0),
-              child: Image.asset(
-                image!,
+            leading: Container(
+              padding: EdgeInsets.all(8),
+              decoration: new BoxDecoration(
+                color: Colors.white10,
+                shape: BoxShape.circle,
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(31.0),
+                child: Text(
+                  personName!.toUpperCase().substring(0, 1),
+                  style: TextStyle(
+                      color:
+                          Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
+                              .withOpacity(1.0),
+                      fontSize: 35,
+                      fontFamily: 'Sans Serif'),
+                ),
               ),
             ),
             title: Padding(

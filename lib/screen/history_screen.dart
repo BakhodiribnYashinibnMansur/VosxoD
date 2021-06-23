@@ -6,9 +6,13 @@ import 'package:VosxoD/utils/my_prefs.dart';
 import 'package:VosxoD/widget/footer.dart';
 import 'package:VosxoD/widget/historyScreen/history_items.dart';
 import 'package:VosxoD/widget/homeScreen/home_screen_navbar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class HistoryScreen extends StatefulWidget {
   @override
@@ -29,7 +33,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
       if (response.statusCode == 200) {
         Map<String, dynamic> map = json.decode(response.body);
         List<dynamic> dataCard = map["orders"];
+
         setState(() {
+          loading = true;
           historyProducts = dataCard;
         });
       }
@@ -52,7 +58,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
         headers: {"token": TOKEN},
         body: jsonDataR,
       );
-      print(json.decode(response.body));
       if (response.statusCode == 200) {
         Map<String, dynamic> map = json.decode(response.body);
         setState(() {
@@ -65,18 +70,57 @@ class _HistoryScreenState extends State<HistoryScreen> {
     }
   }
 
+  Future<void> postSelectedHistory(startDataJson, endDataJson) async {
+    Map<String, dynamic> mapDataR = {
+      "begin": startDataJson,
+      "end": endDataJson,
+    };
+    final jsonDataR = JsonEncoder().convert(mapDataR);
+    final TOKEN = MyPref.token;
+    Uri URL = Uri.parse("https://vosxod.uz/api/history");
+    try {
+      final response = await http.post(
+        URL,
+        headers: {"token": TOKEN},
+        body: jsonDataR,
+      );
+      print(response.body);
+      if (response.statusCode == 200) {
+        Map<String, dynamic> map = json.decode(response.body);
+        List<dynamic> dataCard = map["orders"];
+        setState(() {
+          loading = true;
+          historyProducts = dataCard;
+        });
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  String? startData = '';
+  String? endData = '';
+  String? startDataJson = '';
+  String? endDataJson = '';
+  var dataPicker;
   @override
   void initState() {
     super.initState();
+
     futureCard = getHistoryAPI();
   }
 
+  bool loading = false;
   @override
   Widget build(BuildContext context) {
     final homeData = Provider.of<HomeDataProvider>(
       context,
     );
     homeData.getPageID('3');
+    var now = new DateTime.now();
+    var formatter = new DateFormat('dd-MM-yyyy');
+    String formattedDate = formatter.format(now);
+
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -91,46 +135,150 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 7,
-                        horizontal: 15,
-                      ),
-                      child: Text(
-                        'Savdo Tarixi',
-                        style: TextStyle(
-                            color: Color.fromRGBO(255, 255, 255, 1),
-                            fontFamily: 'CeraPro',
-                            fontSize: 18,
-                            letterSpacing: 0,
-                            fontWeight: FontWeight.normal,
-                            height: 1),
-                      ),
+                    Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            vertical: 7,
+                            horizontal: 15,
+                          ),
+                          child: Text(
+                            'Savdo Tarixi',
+                            style: TextStyle(
+                                color: Color.fromRGBO(255, 255, 255, 1),
+                                fontFamily: 'CeraPro',
+                                fontSize: 18,
+                                letterSpacing: 0,
+                                fontWeight: FontWeight.normal,
+                                height: 1),
+                          ),
+                        ),
+                        Spacer(),
+                        GestureDetector(
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return Dialog(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    elevation: 0,
+                                    backgroundColor: Colors.white,
+                                    child: Container(
+                                      height: 50.h,
+                                      child: Column(
+                                        children: [
+                                          SfDateRangePicker(
+                                            onSelectionChanged:
+                                                (DateRangePickerSelectionChangedArgs
+                                                    args) {
+                                              setState(() {
+                                                dataPicker = args.value;
+                                              });
+                                            },
+                                            selectionMode:
+                                                DateRangePickerSelectionMode
+                                                    .range,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: RaisedButton(
+                                              color: Colors.blueAccent,
+                                              onPressed: () {
+                                                startData = DateFormat(
+                                                        'dd-MM-yyyy')
+                                                    .format(
+                                                        dataPicker.startDate);
+                                                startDataJson = DateFormat(
+                                                        'yyyy-MM-dd')
+                                                    .format(
+                                                        dataPicker.startDate);
+                                                endData = DateFormat(
+                                                        'dd-MM-yyyy')
+                                                    .format(dataPicker.endDate);
+                                                endDataJson = DateFormat(
+                                                        'yyyy-MM-dd')
+                                                    .format(dataPicker.endDate);
+                                                postSelectedHistory(
+                                                    startDataJson, endDataJson);
+                                                Navigator.of(context)
+                                                    .pop(context);
+                                              },
+                                              child: Text('Malumotlarni Olish'),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                });
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 8),
+                                  child: Icon(Icons.date_range,
+                                      color: Colors.white, size: 22.sp),
+                                ),
+                                Text(
+                                  startData!.length == 0 && endData!.length == 0
+                                      ? formattedDate
+                                      : startData!.substring(0, 5) +
+                                          ' / ' +
+                                          endData!,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 17,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    historyProducts.length != 0
+                    loading
                         ? Container(
                             child: Expanded(
                               flex: 14,
-                              child: ListView.builder(
-                                itemCount: historyProducts.length,
-                                itemBuilder: (context, index) {
-                                  return GestureDetector(
-                                    onTap: () {
-                                      postAlertAPI(
-                                          historyProducts[index]['id']);
-                                    },
-                                    child: HistoryItems(
-                                      image: 'asset/image/photo.png',
-                                      title: historyProducts[index]['nomer'],
-                                      personName: historyProducts[index]
-                                          ['kontragent'],
-                                      productNumber: historyProducts[index]
-                                          ['summa'],
-                                      price: historyProducts[index]['date'],
+                              child: historyProducts.length != 0
+                                  ? ListView.builder(
+                                      itemCount: historyProducts.length,
+                                      itemBuilder: (context, index) {
+                                        return GestureDetector(
+                                          onTap: () {
+                                            postAlertAPI(
+                                                historyProducts[index]['id']);
+                                          },
+                                          child: HistoryItems(
+                                            image: 'asset/image/photo.png',
+                                            title: historyProducts[index]
+                                                ['nomer'],
+                                            personName: historyProducts[index]
+                                                ['kontragent'],
+                                            productNumber:
+                                                historyProducts[index]['summa'],
+                                            price: historyProducts[index]
+                                                ['date'],
+                                          ),
+                                        );
+                                      },
+                                    )
+                                  : Container(
+                                      color: cHomePageBackgroundColor,
+                                      child: Center(
+                                        child: Text(
+                                          ' Savdo Tarixlar bo\'sh',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 22),
+                                        ),
+                                      ),
                                     ),
-                                  );
-                                },
-                              ),
                             ),
                           )
                         : Container(
@@ -139,10 +287,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
                               child: CircularProgressIndicator(),
                             ),
                           ),
+                    Spacer(),
+                    FootBar(),
                   ],
                 ),
               ),
-              FootBar(),
             ],
           ),
         ),
@@ -386,7 +535,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                         ),
                                         DataCell(
                                           Text(
-                                            map['price'].toString() + 'sum',
+                                            map['price'].toString() +
+                                                ' ' +
+                                                'so\'m',
                                           ),
                                         ),
                                       ],

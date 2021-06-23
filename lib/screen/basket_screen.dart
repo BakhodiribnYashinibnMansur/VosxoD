@@ -617,7 +617,7 @@ class _BasketScreenState extends State<BasketScreen> {
                                                                             '[0-9]')),
                                                                   ],
                                                                   controller:
-                                                                      controllerArray[
+                                                                      controllerArray [
                                                                           index],
                                                                   onChanged:
                                                                       (text) {

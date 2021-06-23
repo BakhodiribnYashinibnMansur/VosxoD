@@ -76,7 +76,7 @@ class HistoryListTitle extends StatelessWidget {
                                 height: 1,
                                 color: Color.fromRGBO(255, 255, 255, 1),
                                 fontFamily: 'CeraPro',
-                                fontSize: 14.sp,
+                                fontSize: 11.sp,
                                 letterSpacing: 0,
                                 fontWeight: FontWeight.bold,
                               ),
