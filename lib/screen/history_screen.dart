@@ -157,62 +157,60 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         GestureDetector(
                           onTap: () {
                             showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return Dialog(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    elevation: 0,
-                                    backgroundColor: Colors.white,
-                                    child: Container(
-                                      height: 50.h,
-                                      child: Column(
-                                        children: [
-                                          SfDateRangePicker(
-                                            onSelectionChanged:
-                                                (DateRangePickerSelectionChangedArgs
-                                                    args) {
-                                              setState(() {
-                                                dataPicker = args.value;
-                                              });
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Dialog(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  elevation: 0,
+                                  backgroundColor: Colors.white,
+                                  child: Container(
+                                    height: 50.h,
+                                    child: Column(
+                                      children: [
+                                        SfDateRangePicker(
+                                          onSelectionChanged:
+                                              (DateRangePickerSelectionChangedArgs
+                                                  args) {
+                                            setState(() {
+                                              dataPicker = args.value;
+                                            });
+                                          },
+                                          selectionMode:
+                                              DateRangePickerSelectionMode
+                                                  .range,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: RaisedButton(
+                                            color: Colors.blueAccent,
+                                            onPressed: () {
+                                              startData = DateFormat(
+                                                      'dd-MM-yyyy')
+                                                  .format(dataPicker.startDate);
+                                              startDataJson = DateFormat(
+                                                      'yyyy-MM-dd')
+                                                  .format(dataPicker.startDate);
+                                              endData = DateFormat('dd-MM-yyyy')
+                                                  .format(dataPicker.endDate);
+                                              endDataJson = DateFormat(
+                                                      'yyyy-MM-dd')
+                                                  .format(dataPicker.endDate);
+                                              postSelectedHistory(
+                                                  startDataJson, endDataJson);
+                                              Navigator.of(context)
+                                                  .pop(context);
                                             },
-                                            selectionMode:
-                                                DateRangePickerSelectionMode
-                                                    .range,
+                                            child: Text('Malumotlarni Olish'),
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: RaisedButton(
-                                              color: Colors.blueAccent,
-                                              onPressed: () {
-                                                startData = DateFormat(
-                                                        'dd-MM-yyyy')
-                                                    .format(
-                                                        dataPicker.startDate);
-                                                startDataJson = DateFormat(
-                                                        'yyyy-MM-dd')
-                                                    .format(
-                                                        dataPicker.startDate);
-                                                endData = DateFormat(
-                                                        'dd-MM-yyyy')
-                                                    .format(dataPicker.endDate);
-                                                endDataJson = DateFormat(
-                                                        'yyyy-MM-dd')
-                                                    .format(dataPicker.endDate);
-                                                postSelectedHistory(
-                                                    startDataJson, endDataJson);
-                                                Navigator.of(context)
-                                                    .pop(context);
-                                              },
-                                              child: Text('Malumotlarni Olish'),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
-                                  );
-                                });
+                                  ),
+                                );
+                              },
+                            );
                           },
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
